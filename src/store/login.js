@@ -48,6 +48,8 @@ const actions = {
 	},
 	async doLogout(){
 
+		localStorage.removeItem('app-documentos-iso')
+
 		router.push('/')
 
 	}
