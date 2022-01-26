@@ -1,15 +1,29 @@
 <template>
-  <hello-world />
+	<div>
+		<v-container>
+			<v-row>
+				<v-col>
+					<Header />
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col>
+					<Menu />
+				</v-col>
+			</v-row>
+		</v-container>
+	</div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
 
-  export default {
-    name: 'Home',
+	import Menu from '@/components/Home/Menu'
+	import Header from '@/components/Home/Header'
 
-    components: {
-      HelloWorld,
-    },
-  }
+	export default {
+		components: {
+			Menu,
+			Header
+		},
+	}
 </script>
