@@ -1,21 +1,18 @@
 <template>
 	<div>
-		<v-row class="mt-4">
+		<v-row align="center">
 			<v-col cols="6">
-				<h1>Inicio</h1>
+				<Breadcrum />
 			</v-col>
 			<v-col cols="6" class="text-right" align="right">
-				<v-btn elevation="0" small fab>
+				<v-btn color="white" elevation="0" small fab>
 					<v-icon light>mdi-magnify</v-icon>
 				</v-btn>
-				<v-btn elevation="0" class="ml-4 mr-4" small fab>
+				<v-btn color="white" elevation="0" class="ml-4 mr-4" small fab>
 					<v-icon light>mdi-bell</v-icon>
 				</v-btn>	
 				<Account />			
 			</v-col>
-			<!-- <v-col cols="3" align="right">
-				
-			</v-col> -->
 		</v-row>
 	</div>
 </template>
@@ -23,10 +20,12 @@
 <script>
 
 	import Account from '@/components/Home/Account'
+	import Breadcrum from '@/components/Home/Breadcrum'
 
 	export default {
 		components: {
-			Account
+			Account,
+			Breadcrum
 		},
 		data: () => ({
 			

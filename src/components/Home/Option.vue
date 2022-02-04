@@ -1,9 +1,7 @@
 <template>
 	<div>
-		<v-hover
-			v-slot="{ hover }"
-		>
-			<v-card :elevation="hover ? 12 : 0" :color="hover ? '#0A306D' : 'grey lighten-2'" outlined min-height="150" style="border-radius: 10px; cursor: pointer">
+		<v-hover v-slot="{ hover }">
+			<v-card :to="{name: data.to}" :elevation="hover ? 12 : 0" :color="hover ? '#0A306D' : 'white'" outlined min-height="150" style="border-radius: 10px; cursor: pointer">
 				<v-card-text>
 					<lottie :options="data.animation" :height="100"/>
 				</v-card-text>

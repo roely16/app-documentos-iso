@@ -15,15 +15,10 @@
 						*/
 
 					-->
-					<v-avatar>
-						<img
-							style="z-index: 1"
-							:src="userData.imagen_perfil"
-							alt="John"
-							contain
-						>
-					</v-avatar>
-					<span class="ml-2">
+					<!-- <v-avatar>
+					</v-avatar> -->
+					<lottie :height="100" :options="defaultOptions" />
+					<span>
 						{{ userData.usuario }}
 					</span>
 					<v-icon light>mdi-chevron-down</v-icon>
@@ -48,7 +43,12 @@
 
 	import { mapActions } from "vuex"
 
+	import Lottie from 'vue-lottie'
+
 	export default {
+		components: {
+			'lottie': Lottie
+		},
 		data(){
 
 			let self = this
@@ -66,6 +66,9 @@
 						onPress: () => { self.logout() } 
 					},
 				],
+				defaultOptions: {
+					animationData: require('@/assets/lottie/account.json'),
+				},
 			}
 		},
 		methods: {

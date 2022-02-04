@@ -4,6 +4,9 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 
+import CreateQR from '../views/CreateQR.vue'
+import UploadDocument from '../views/UploadDocument'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,7 +19,55 @@ const routes = [
 		path: '/home',
 		name: 'home',
 		component: Home,
-		children: []
+		meta: {
+			breadcrum: [
+				{
+					text: 'Inicio',
+					disabled: false,
+					href: '#/',
+				}
+			],
+		},
+		children: [
+			{
+				path: '/home/creacion_qr',
+				name: 'create_qr',
+				component: CreateQR,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Generación de QR',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/subir_documento',
+				name: 'upload_document',
+				component: UploadDocument,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Subir Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			}
+		]
 	}
 ]
 

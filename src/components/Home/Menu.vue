@@ -37,7 +37,8 @@
 						animation: {
 							animationData: require('@/assets/lottie/document.json'),
 							loop: true
-						}
+						},
+						to: 'upload_document'
 					},
 					{
 						name: 'Verificación',
@@ -54,8 +55,9 @@
 					{
 						name: 'Generar QR',
 						animation: {
-							animationData: require('@/assets/lottie/create-qr.json')
-						}
+							animationData: require('@/assets/lottie/create-qr.json'),	
+						},
+						to: 'create_qr'
 					}
 				]
 			}
