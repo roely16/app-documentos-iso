@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-card outlined elevation="2" style="border-radius: 10px">
+		<v-card :outlined="outlined" :elevation="elevation" style="border-radius: 10px">
 			<v-card-text class="mt-4">
 				<v-row align="center">
 					<v-col cols="4">
@@ -33,6 +33,16 @@
 	import { mapMutations } from "vuex"
 
 	export default {
+		props: {
+			outlined: {
+				type: Boolean,
+				default: true
+			},
+			elevation: {
+				type: Number,
+				default: 2
+			}
+		},
 		methods: {
 			...mapMutations({
 				setSearch: 'table/setSearch'

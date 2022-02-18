@@ -61,11 +61,11 @@ const actions = {
 	async fetchData({commit}){
 
 		try {
-	
+			
 			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
 
 			const payload = {
-				nit: userData.nit
+				nit: userData.nit,
 			}
 
 			commit('table/setLoading', true, {root: true})
@@ -136,12 +136,15 @@ const actions = {
 		}
 
 	},
-	// eslint-disable-next-line no-unused-vars
 	async uploadDocument({commit, dispatch}, payload){
 
 		try {
 			
 			commit('setUploading', true)
+
+			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+
+			payload.documento.usuario = userData.usuario
 
 			let formData = new FormData()
 
@@ -170,7 +173,7 @@ const actions = {
 
 			commit('setUploading', false)
 
-			dispatch('fetchData')
+			dispatch(payload.fetchData, payload.fetchParams, {root: payload.fetchRoot})
 
 		} catch (error) {
 			

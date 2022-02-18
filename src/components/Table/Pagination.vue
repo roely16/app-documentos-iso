@@ -1,8 +1,9 @@
 <template>
-	<div>
+	<div v-if="page_count > 0">
 		<v-pagination
 			v-model="page"
 			:length="page_count"
+			total-visible="7"
 		></v-pagination>
 	</div>
 </template>

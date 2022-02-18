@@ -2,7 +2,7 @@ const namespaced = true
 
 const state = {
 	processing_preview: false,
-	path_preview: ''
+	path_preview: 'https://ncu.rcnpv.com.tw/Uploads/20131231103232738561744.pdf#toolbar=0&navpanes=0&scrollbar=0'
 }
 
 const mutations = {

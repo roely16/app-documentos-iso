@@ -24,6 +24,10 @@
 				<Empty />
 			</template>
 
+			<template v-slot:no-data>
+				<EmptyBox />
+			</template>
+
 		</v-data-table>
 
 		<v-row>
@@ -32,7 +36,7 @@
 			</v-col>
 		</v-row>
 
-		<v-row v-if="!loading">
+		<v-row v-if="!loading && data">
 			<v-col>
 				<Pagination />
 			</v-col>
@@ -47,6 +51,7 @@
 	import Loading from '@/components/Table/Loading'
 	import Empty from '@/components/Table/Empty'
 	import Pagination from '@/components/Table/Pagination'
+	import EmptyBox from '@/components/Table/EmptyBox'
 
 	export default {
 		props: {
@@ -55,7 +60,8 @@
 		components: {
 			Loading,
 			Pagination,
-			Empty
+			Empty,
+			EmptyBox
 		},
 		data () {
 			return {

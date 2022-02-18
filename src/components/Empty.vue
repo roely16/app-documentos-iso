@@ -12,6 +12,10 @@
 			height: {
 				type: Number,
 				default: 500
+			},
+			loop: {
+				type: Boolean,
+				default: true
 			}
 		},
 		components: {
@@ -20,7 +24,8 @@
 		data(){
 			return{
 				defaultOptions: {
-					animationData: require('@/assets/lottie/uploading.json'),
+					animationData: require('@/assets/lottie/empty_box.json'),
+					loop: this.loop
 				},
 			}
 		}

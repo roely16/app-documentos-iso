@@ -6,6 +6,11 @@ import Home from '../views/Home.vue'
 
 import CreateQR from '../views/CreateQR.vue'
 import UploadDocument from '../views/UploadDocument'
+import Check from '../views/Check.vue'
+import DocumentDetail from '../views/DocumentDetail.vue'
+import DocumentDetailCheck from '../views/DocumentDetailCheck'
+import Publication from '../views/Publication'
+import DocumentDetailPub from '../views/DocumentDetailPub'
 
 Vue.use(VueRouter)
 
@@ -61,6 +66,116 @@ const routes = [
 						},
 						{
 							text: 'Subir Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/verificacion',
+				name: 'check',
+				component: Check,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Verificar Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/publicacion',
+				name: 'publication',
+				component: Publication,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Publicar Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/publicacion/detalle_documento/:id',
+				name: 'document_detail_pub',
+				component: DocumentDetailPub,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Publicar Documentos',
+							disabled: false,
+							href: '#/home/verificacion',
+						},
+						{
+							text: 'Detalle',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/verificacion/detalle_documento/:id',
+				name: 'document_detail_check',
+				component: DocumentDetailCheck,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Verificar Documentos',
+							disabled: false,
+							href: '#/home/verificacion',
+						},
+						{
+							text: 'Detalle',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/subir_documento/detalle_documento/:id',
+				name: 'document_detail',
+				component: DocumentDetail,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Subir Documentos',
+							disabled: false,
+							href: '#/home/subir_documento',
+						},
+						{
+							text: 'Detalle',
 							disabled: true,
 							href: '#/',
 						}

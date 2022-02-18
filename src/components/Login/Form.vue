@@ -61,8 +61,8 @@
 			return{
 				valid: true,
 				user: {
-					user: 'hechur',
-					password: '123456'
+					user: null,
+					password: null
 				},
 				showPassword: false
 			}

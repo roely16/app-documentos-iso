@@ -2,7 +2,8 @@ const namespaced = true
 
 const state = {
 	show: false,
-	loading: false
+	loading: false,
+	modal_content: null
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
 	},
 	setLoading: (state, payload) => {
 		state.loading = payload
+	},
+	setModalContent: (state, payload) => {
+		state.modal_content = payload
 	}
 }
 

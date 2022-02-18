@@ -44,18 +44,20 @@
 						name: 'Verificación',
 						animation: {
 							animationData: require('@/assets/lottie/document_check.json')
-						}
+						},
+						to: 'check'
 					},
 					{
 						name: 'Publicación',
 						animation: {
 							animationData: require('@/assets/lottie/add-document.json')
-						}
+						},
+						to: 'publication'
 					},
 					{
-						name: 'Generar QR',
+						name: 'Configuración',
 						animation: {
-							animationData: require('@/assets/lottie/create-qr.json'),	
+							animationData: require('@/assets/lottie/settings.json'),	
 						},
 						to: 'create_qr'
 					}

@@ -3,14 +3,12 @@
 	<div>
 		<DataCard>
 
-			<template #action>
-				<v-btn @click="showForm()" text>
-					<v-icon>
-						mdi-plus
-					</v-icon>
-				</v-btn>
-			</template>
 			<template #table>
+
+				<!-- Filtro -->
+
+				<Filtro @update="fetchData()" />
+
 				<Table :data="data_table">
 
 					<template #action="item">
@@ -18,7 +16,7 @@
 							text
 							small
 							color="primary"
-							:to="{name: 'document_detail', params: {id: item.documentoid}}"
+							:to="{name: 'document_detail_pub', params: {id: item.documentoid}}"
 						>
 							<v-icon>mdi-information</v-icon>
 						</v-btn>
@@ -55,6 +53,7 @@
 	import Table from '@/components/Table/Table'
 	import Modal from '@/components/Modal'
 	import Form from '@/components/UploadDocument/Form'
+	import Filtro from '@/components/Check/Filter'
 
 	import { mapState, mapActions, mapMutations } from 'vuex'
 
@@ -63,7 +62,8 @@
 			DataCard,
 			Table,
 			Modal,
-			Form
+			Form,
+			Filtro
 		},
 		data(){
 			return{
@@ -72,12 +72,13 @@
 		},
 		methods: {
 			...mapActions({
-				fetchData: 'upload_document/fetchData',
+				fetchData: 'publication/fetchData',
 				fetchFormDocument: 'upload_document/fetchFormDocument',
 				fetchDetail: 'document_detail/fetchDetail'
 			}),
 			...mapMutations({
-				setShow: 'modal/setShow'
+				setShow: 'modal/setShow',
+				setArea: 'filter/setArea'
 			}),
 			showForm(){
 
@@ -88,10 +89,14 @@
 		},
 		computed: {
 			...mapState({
-				data_table: state => state.upload_document.data_table
+				data_table: state => state.publication.data_table
 			})
 		},
 		mounted(){
+
+			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+
+			this.setArea(userData.codarea)
 
 			this.fetchData()
 
