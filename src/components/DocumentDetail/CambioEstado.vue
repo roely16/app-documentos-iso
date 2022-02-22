@@ -79,6 +79,19 @@
 						<v-btn @click="clearFormBitacora()" elevation="0" class="ml-2" color="error">Cancelar</v-btn>
 					</v-col>
 				</v-row>
+
+				<v-row v-if="alert_msg.alert_message">
+					<v-col>
+						<v-alert
+							icon="mdi-information"
+							prominent
+							text
+							type="info"
+						>
+							{{ alert_msg.alert_message }}
+						</v-alert>
+					</v-col>
+				</v-row>
 			</v-card-text>
 		</v-card>
 	</div>
@@ -129,6 +142,12 @@
 				set(value){
 					this.setCambioEstado(value)
 				}
+			},
+			alert_msg: function(){
+
+				let result = this.detail_version.estados.filter(item => item.estadoid === this.estadoSelect)
+
+				return result.length > 0 ? result[0] : false
 			}
 		}
 
