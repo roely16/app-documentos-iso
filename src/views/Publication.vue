@@ -89,14 +89,19 @@
 		},
 		computed: {
 			...mapState({
-				data_table: state => state.publication.data_table
+				data_table: state => state.publication.data_table,
+				area: state => state.filter.area
 			})
 		},
 		mounted(){
 
-			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+			if (!this.area) {
+				
+				const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
 
-			this.setArea(userData.codarea)
+				this.setArea(userData.codarea)
+
+			}
 
 			this.fetchData()
 

@@ -5,10 +5,10 @@
 				<v-autocomplete @change="() => { $emit('update') }" v-model="area" :items="filters.areas" item-text="descripcion" item-value="codarea" class="input-rounded" label="Sección o Área" outlined></v-autocomplete>
 			</v-col>
 			<v-col cols="3">
-				<v-autocomplete v-model="tipo" :items="filters.tipos" item-text="nombre" item-value="estadoid" class="input-rounded" label="Tipo" outlined></v-autocomplete>
+				<v-autocomplete v-model="tipo" :items="filters.tipos" item-text="nombre" item-value="tipodocumentoid" class="input-rounded" label="Tipo" outlined></v-autocomplete>
 			</v-col>
 			<v-col cols="3">
-				<v-autocomplete v-model="estado" :items="filters.estados" item-text="nombre" item-value="tipodocumentoid" class="input-rounded" label="Estado" outlined></v-autocomplete>
+				<v-autocomplete v-model="estado" :items="filters.estados" item-text="nombre" item-value="estadoid" class="input-rounded" label="Estado" outlined></v-autocomplete>
 			</v-col>
 		</v-row>
 	</div>

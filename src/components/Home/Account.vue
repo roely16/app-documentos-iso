@@ -55,11 +55,11 @@
 
 			return{
 				options: [
-					{ 
-						title: 'Configuración',
-						icon: 'mdi-cog',
-						onPress: () => { console.log('configuration') } 
-					},
+					// { 
+					// 	title: 'Configuración',
+					// 	icon: 'mdi-cog',
+					// 	onPress: () => { console.log('configuration') } 
+					// },
 					{ 
 						title: 'Salir',
 						icon: 'mdi-logout',

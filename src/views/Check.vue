@@ -9,7 +9,7 @@
 
 				<Filtro @update="fetchData()" />
 
-				<Table :data="data_table">
+				<Table :data="data_table_filter">
 
 					<template #action="item">
 						<v-btn
@@ -89,14 +89,37 @@
 		},
 		computed: {
 			...mapState({
-				data_table: state => state.check.data_table
-			})
+				data_table: state => state.check.data_table,
+				area: state => state.filter.area,
+				tipo: state => state.filter.tipo,
+				estado: state => state.filter.estado
+			}),
+			data_table_filter: function(){
+
+				if (this.data_table.items && (this.tipo || this.estado)) {
+					
+					let result = this.data_table.items.filter(item => this.tipo && this.estado ? (item.tipodocumentoid == this.tipo && item.estadoid == this.estado) : (item.tipodocumentoid == this.tipo || item.estadoid == this.estado))
+					
+					return {
+						headers: this.data_table.headers,
+						items: result
+					}
+
+				}
+				
+				return this.data_table
+				
+			}
 		},
 		mounted(){
 
-			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+			if (!this.area) {
+				
+				const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
 
-			this.setArea(userData.codarea)
+				this.setArea(userData.codarea)
+
+			}		
 
 			this.fetchData()
 
