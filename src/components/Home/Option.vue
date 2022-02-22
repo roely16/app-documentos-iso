@@ -1,9 +1,11 @@
 <template>
 	<div>
 		<v-hover v-slot="{ hover }">
-			<v-card :to="{name: data.to}" :elevation="hover ? 12 : 0" :color="hover ? '#0A306D' : 'white'" outlined min-height="150" style="border-radius: 10px; cursor: pointer">
+			<v-card :to="{name: data.url}" :elevation="hover ? 12 : 0" :color="hover ? '#0A306D' : 'white'" outlined min-height="150" style="border-radius: 10px; cursor: pointer">
 				<v-card-text>
-					<lottie :options="data.animation" :height="100"/>
+					<lottie :options="{
+						animationData: require('@/assets/lottie/' + data.icon)	
+					}" :height="100"/>
 				</v-card-text>
 				<v-card-text :class="['text-h5', 'font-weight-bold', 'text-center', 'mt-0', 'pt-0', hover ? 'white--text': null]">
 					{{ title }}
@@ -15,8 +17,9 @@
 
 <script>
 
+	/* eslint-disable vue/no-unused-components */
+
 	import Lottie from 'vue-lottie';
-	//import animationData from '@/assets/lottie/loading-rocket.json';
 
 	export default {
 		props: {
@@ -26,12 +29,6 @@
 		components: {
 			'lottie': Lottie
 		},
-		data: () => {
-			return{
-				defaultOptions: {
-					animationData: require('@/assets/lottie/loading-rocket.json'),
-				},
-			}
-		}
+		
 	}
 </script>

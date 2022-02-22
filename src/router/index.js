@@ -11,6 +11,7 @@ import DocumentDetail from '../views/DocumentDetail.vue'
 import DocumentDetailCheck from '../views/DocumentDetailCheck'
 import Publication from '../views/Publication'
 import DocumentDetailPub from '../views/DocumentDetailPub'
+import Config from '../views/Config'
 
 Vue.use(VueRouter)
 
@@ -104,6 +105,25 @@ const routes = [
 						},
 						{
 							text: 'Publicar Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/configuracion',
+				name: 'config',
+				component: Config,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Configuración',
 							disabled: true,
 							href: '#/',
 						}

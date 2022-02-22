@@ -33,6 +33,6 @@ export default new Vuex.Store({
 		document_detail: document_detail,
 		filter: filter,
 		check: check,
-		publication: publication
+		publication: publication,
 	}
 })

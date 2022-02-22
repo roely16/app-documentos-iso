@@ -7,8 +7,8 @@
 		</v-row>
 
 		<v-row>
-			<v-col v-for="(option, key) in options" :key="key">
-				<Option :data="option" :title="option.name" />
+			<v-col v-for="(option, key) in menu" :key="key">
+				<Option :data="option" :title="option.nombre" />
 			</v-col>
 		</v-row>
 	</div>
@@ -16,13 +16,13 @@
 
 <script>
 
-	// import Lottie from 'vue-lottie';
 	import animationData from '@/assets/lottie/loading-rocket.json';
 	import Option from '@/components/Home/Option'
 
+	import { mapActions, mapState } from 'vuex';
+
 	export default {
 		components: {
-			// 'lottie': Lottie
 			Option
 		},
 		data(){
@@ -36,7 +36,6 @@
 						name: 'Subir Documentos',
 						animation: {
 							animationData: require('@/assets/lottie/document.json'),
-							loop: true
 						},
 						to: 'upload_document'
 					},
@@ -63,6 +62,21 @@
 					}
 				]
 			}
+		},
+		methods: {
+			...mapActions({
+				fetchMenu: 'home/fetchMenu'
+			})
+		},
+		computed: {
+			...mapState({
+				menu: state => state.home.menu
+			})
+		},
+		mounted(){
+
+			this.fetchMenu()
+
 		}	
 	}
 </script>
