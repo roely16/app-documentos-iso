@@ -35,7 +35,10 @@
 										</v-chip>
 									</div>
 
-									<div class="text-caption">
+									<div v-html="item.comentarios" v-if="item.comentarios" class="text-caption">
+									</div>
+
+									<div else class="text-caption">
 										{{ item.text_comentario }}
 									</div>
 								</v-col>
