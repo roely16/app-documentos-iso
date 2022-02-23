@@ -141,9 +141,7 @@
 				uploadDocument: 'upload_document/uploadDocument'
 			}),
 			process(){
-
 				this.fetchPreview({documento: this.documento, pdf: this.pdf})
-
 			},
 			upload(){
 

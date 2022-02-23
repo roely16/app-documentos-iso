@@ -144,7 +144,7 @@ const routes = [
 						{
 							text: 'Publicar Documentos',
 							disabled: false,
-							href: '#/home/verificacion',
+							href: '#/home/publicacion',
 						},
 						{
 							text: 'Detalle',

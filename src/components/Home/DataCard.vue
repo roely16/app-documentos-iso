@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-card :outlined="outlined" :elevation="elevation" style="border-radius: 10px">
-			<v-card-text class="mt-4">
+			<v-card-text v-if="show_search" class="mt-4">
 				<v-row align="center">
 					<v-col cols="4">
 						<v-text-field v-model="search" hide-details clearable prepend-inner-icon="mdi-magnify" placeholder="Buscar..." outlined class="input-rounded"></v-text-field>
@@ -41,6 +41,10 @@
 			elevation: {
 				type: Number,
 				default: 2
+			},
+			show_search: {
+				type: Boolean, 
+				default: true
 			}
 		},
 		methods: {
