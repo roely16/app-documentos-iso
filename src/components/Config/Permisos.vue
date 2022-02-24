@@ -5,7 +5,10 @@
 				<v-text-field v-model="search" label="Buscar..." outlined hide-details prepend-inner-icon="mdi-magnify" ></v-text-field>
 			</v-col>
 			<v-col align="right">
-				<v-btn @click="fetchAreas()" text>
+				<v-btn @click="() => {
+					form = 'create'
+					fetchAreas()	
+				}" text>
 					<v-icon>
 						mdi-plus
 					</v-icon>
@@ -15,8 +18,11 @@
 		<v-row>
 			<v-col>
 				<Table :search_prop="search" :data="data_table">
-					<template #action>
-						<v-btn color="primary" icon>
+					<template #action="item">
+						<v-btn @click="() => {
+							form = 'edit'	
+							fetchPermissionDetail(item)
+						}" color="primary" icon>
 							<v-icon>
 								mdi-information
 							</v-icon>
@@ -33,7 +39,8 @@
 		
 		<Modal width="1000" scrollable>
 			<template #content>
-				<Form></Form>
+				<Form v-if="form === 'create'"></Form>
+				<FormEdit v-if="form === 'edit'"></FormEdit>
 			</template>
 		</Modal>	
 
@@ -45,6 +52,7 @@
 	import Table from '@/components/Table/Table'
 	import Modal from '@/components/Modal'
 	import Form from '@/components/Config/Form'
+	import FormEdit from '@/components/Config/FormEditPermission'
 
 	import { mapActions, mapState } from 'vuex'
 
@@ -52,17 +60,20 @@
 		components: {
 			Table,
 			Modal,
-			Form
+			Form,
+			FormEdit
 		},
 		data(){
 			return{
-				search: null
+				search: null,
+				form: null
 			}
 		},
 		methods: {
 			...mapActions({
 				fetchAreas: 'permission/fetchAreas',
-				fetchPermissions: 'permission/fetchPermissions'
+				fetchPermissions: 'permission/fetchPermissions',
+				fetchPermissionDetail: 'permission/fetchPermissionDetail'
 			})
 		},
 		computed: {

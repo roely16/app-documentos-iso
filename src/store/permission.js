@@ -10,7 +10,10 @@ const state = {
 	options_select: [],
 	colaboradores: [],
 	saving: false,
-	data_table: {}
+	data_table: {},
+	colaborador: {},
+	asignados: [],
+	pendientes: []
 }
 
 const mutations = {
@@ -56,6 +59,11 @@ const mutations = {
 	resetForm: (state) => {
 		state.options_select = []
 		state.colaboradores = []
+	},
+	setEditInfo: (state, payload) => {
+		state.colaborador = payload.colaborador
+		state.asignados = payload.asignados
+		state.pendientes = payload.pendientes
 	}
 }
 
@@ -116,6 +124,36 @@ const actions = {
 		commit('setDataTable', response.data)
 
 		commit('table/setLoading', false, {root: true})
+
+	},
+
+	async fetchPermissionDetail({commit}, payload){
+
+		commit('modal/setShow', true, {root: true})
+
+		const data = {
+			usuario: payload.usuario
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'get_permission_detail', data)
+
+		commit('setEditInfo', response.data)
+
+	},
+
+	async remove_add_permission({state, dispatch}, payload){
+
+		const data = {
+			action: payload.action,
+			usuario: state.colaborador.nit,
+			id_menu: payload.id_menu
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'remove_add_permission', data)
+
+		dispatch('fetchPermissionDetail', {usuario: state.colaborador.nit})
+
+		dispatch('fetchPermissions')
 
 		console.log(response.data)
 
