@@ -1,14 +1,24 @@
 <template>
 	<div>
-		<v-row justify="center" class="text-center">
-			<v-col align-self="center" cols="12">
-				<!-- <lottie :options="defaultOptions" :height="500" :width="400"/> -->
+		<v-row class="mt-4">
+			<v-col cols="3" v-for="(option, key) in menu" :key="key">
+				<Option :data="option" :title="option.nombre" />
 			</v-col>
 		</v-row>
 
-		<v-row>
-			<v-col v-for="(option, key) in menu" :key="key">
-				<Option :data="option" :title="option.nombre" />
+		<v-row v-if="menu.length <= 0">
+			<v-col>
+				<NoAccess>
+					<template #message>
+						<v-row>
+							<v-col class="text-center">
+								<span class="text-h4">
+									Es necesario que solicite acceso al administrador.
+								</span>
+							</v-col>
+						</v-row>
+					</template>
+				</NoAccess>
 			</v-col>
 		</v-row>
 	</div>
@@ -16,51 +26,19 @@
 
 <script>
 
-	import animationData from '@/assets/lottie/loading-rocket.json';
 	import Option from '@/components/Home/Option'
+	import NoAccess from '@/components/Home/NoAccess'
 
 	import { mapActions, mapState } from 'vuex';
 
 	export default {
 		components: {
-			Option
+			Option,
+			NoAccess
 		},
 		data(){
 			return{
-				defaultOptions: {
-					animationData: animationData,
-				},
-				animationSpeed: 1,
-				options: [
-					{
-						name: 'Subir Documentos',
-						animation: {
-							animationData: require('@/assets/lottie/document.json'),
-						},
-						to: 'upload_document'
-					},
-					{
-						name: 'Verificación',
-						animation: {
-							animationData: require('@/assets/lottie/document_check.json')
-						},
-						to: 'check'
-					},
-					{
-						name: 'Publicación',
-						animation: {
-							animationData: require('@/assets/lottie/add-document.json')
-						},
-						to: 'publication'
-					},
-					{
-						name: 'Configuración',
-						animation: {
-							animationData: require('@/assets/lottie/settings.json'),	
-						},
-						to: 'create_qr'
-					}
-				]
+				
 			}
 		},
 		methods: {

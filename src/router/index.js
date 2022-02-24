@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 /* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -12,6 +14,7 @@ import DocumentDetailCheck from '../views/DocumentDetailCheck'
 import Publication from '../views/Publication'
 import DocumentDetailPub from '../views/DocumentDetailPub'
 import Config from '../views/Config'
+import NoAccess from '../views/NoAccess'
 
 Vue.use(VueRouter)
 
@@ -131,6 +134,20 @@ const routes = [
 				}
 			},
 			{
+				path: '/home/no_access',
+				name: 'no_access',
+				component: NoAccess,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						}
+					]
+				}
+			},
+			{
 				path: '/home/publicacion/detalle_documento/:id',
 				name: 'document_detail_pub',
 				component: DocumentDetailPub,
@@ -210,11 +227,29 @@ const router = new VueRouter({
 	routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 
 	let usuario = JSON.parse(localStorage.getItem('app-documentos-iso'))
 
 	if (to.name != 'login') {
+
+		// Validar que el usuario tenga acceso a la página
+		if (to.name != 'home' && to.name != 'no_access') {
+			
+			const data = {
+				user: usuario.nit,
+				url: to.name
+			}
+	
+			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_access', data)
+
+			if (!response.data.access) {
+				
+				return next('/home/no_access');
+
+			}
+
+		}
 		
 		if (!usuario) {
 			
