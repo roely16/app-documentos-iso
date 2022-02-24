@@ -9,7 +9,7 @@
 			@page-count="(value) => setPageCount(value)"
 			:page="page"
 			hide-default-footer
-			:search="search"
+			:search="!search_prop ? search : search_prop"
 		>
 
 			<template v-for="(item_table, key) in data.headers" v-slot:[getSlotName(item_table)]="{ item, header }">
@@ -55,7 +55,8 @@
 
 	export default {
 		props: {
-			data: Object
+			data: Object,
+			search_prop: String
 		},
 		components: {
 			Loading,

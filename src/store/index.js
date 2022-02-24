@@ -14,6 +14,7 @@ import document_detail from './document_detail'
 import filter from './filter'
 import check from './check'
 import publication from './publication'
+import permission from './permission'
 
 export default new Vuex.Store({
 	state: {
@@ -34,5 +35,6 @@ export default new Vuex.Store({
 		filter: filter,
 		check: check,
 		publication: publication,
+		permission: permission
 	}
 })

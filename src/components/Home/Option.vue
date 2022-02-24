@@ -17,8 +17,6 @@
 
 <script>
 
-	/* eslint-disable vue/no-unused-components */
-
 	import Lottie from 'vue-lottie';
 
 	export default {

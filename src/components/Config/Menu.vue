@@ -28,8 +28,8 @@
 				selectedItem: 0,
 				items: [
 					{ text: 'Permisos', icon: 'mdi-account-lock' },
-					{ text: 'Audience', icon: 'mdi-account' },
-					{ text: 'Conversions', icon: 'mdi-flag' },
+					// { text: 'Audience', icon: 'mdi-account' },
+					// { text: 'Conversions', icon: 'mdi-flag' },
 				],
 			}
 		}	

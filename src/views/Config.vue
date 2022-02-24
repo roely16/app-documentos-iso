@@ -5,7 +5,8 @@
 				<v-row class="pl-4 pt-4 pr-4 pb-4">
 					<v-col cols="3">
 						<Menu />
-					</v-col>
+					</v-col>	
+					<v-divider vertical></v-divider>				
 					<v-col>
 						<Permisos />
 					</v-col>
