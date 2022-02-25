@@ -95,7 +95,9 @@
 
 			const id = this.$route.params.id
 
-			this.fetchVersions(id)
+			const name_route = this.$route.path.split('/')
+
+			this.fetchVersions({id: id, route_name: name_route[2]})
 
 		}
 	}

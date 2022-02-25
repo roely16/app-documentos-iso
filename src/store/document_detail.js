@@ -94,7 +94,8 @@ const actions = {
 		commit('table/setLoading', true, {root: true})
 
 		const data = {
-			id: payload
+			id: payload.id,
+			route_name: payload.route_name
 		}
 
 		const response = await axios.post(process.env.VUE_APP_API_URL + 'document_versions', data)
