@@ -233,12 +233,14 @@ router.beforeEach(async (to, from, next) => {
 
 	if (to.name != 'login') {
 
+		let url_split = to.path.split("/")
+
 		// Validar que el usuario tenga acceso a la página
 		if (to.name != 'home' && to.name != 'no_access') {
 			
 			const data = {
 				user: usuario.nit,
-				url: to.name
+				url: url_split.length <= 3 ? to.name : from.name
 			}
 	
 			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_access', data)
