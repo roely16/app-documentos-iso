@@ -18,7 +18,9 @@ const state = {
 		posicion_vertical: 15,
 		margen_horizontal: 15
 	},
-	uploading: false
+	uploading: false,
+	acronimo_tipo_documento: null,
+	acronimo_seccion: null
 }
 
 const mutations = {
@@ -53,6 +55,12 @@ const mutations = {
 			posicion_vertical: 15,
 			margen_horizontal: 15
 		}
+	},
+	setAcronimoTipo: (state, payload) => {
+		state.acronimo_tipo_documento = payload
+	},
+	setAcronimoSeccion: (state, payload) => {
+		state.acronimo_seccion = payload
 	}
 }
 
@@ -136,7 +144,7 @@ const actions = {
 		}
 
 	},
-	async uploadDocument({commit, dispatch}, payload){
+	async uploadDocument({commit, dispatch, state}, payload){
 
 		try {
 			
@@ -150,6 +158,10 @@ const actions = {
 
 			formData.append('file', payload.pdf)
 			formData.append('file_preview', payload.pdf)
+
+			// Formar el código del documento
+			payload.documento.codigo = state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload.documento.codigo
+
 			formData.append('documento', JSON.stringify(payload.documento))
 			formData.append('settings', JSON.stringify(state.settings))
 			formData.append('original', payload.original)
@@ -178,6 +190,36 @@ const actions = {
 		} catch (error) {
 			
 			console.log(error)
+
+		}
+
+	},
+	async getAcronimoTipo({commit}, payload){
+
+		if (payload) {
+			
+			const data = {
+				tipo_documento: payload
+			}
+	
+			const response = await axios.post(process.env.VUE_APP_API_URL + 'get_acronimo_tipo', data)
+	
+			commit('setAcronimoTipo', response.data)
+
+		}
+
+	},
+	async getAcronimoSeccion({commit}, payload){
+
+		if (payload) {
+			
+			const data = {
+				colaborador: payload
+			}
+	
+			const response = await axios.post(process.env.VUE_APP_API_URL + 'get_acronimo_seccion', data)
+	
+			commit('setAcronimoSeccion', response.data)
 
 		}
 

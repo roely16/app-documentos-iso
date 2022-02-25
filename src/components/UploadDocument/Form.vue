@@ -17,10 +17,23 @@
 						<v-col cols="4">
 							<v-row>
 								<v-col v-if="!version" cols="12">
-									<v-autocomplete :rules="[v => !!v]" v-model="documento.tipo_documento" :items="tipos_documento" item-text="nombre" item-value="tipodocumentoid" outlined hide-details label="Tipo de Documento"></v-autocomplete>
+									<v-autocomplete @change="getAcronimoTipo(documento.tipo_documento)" :rules="[v => !!v]" v-model="documento.tipo_documento" :items="tipos_documento" item-text="nombre" item-value="tipodocumentoid" outlined hide-details label="Tipo de Documento"></v-autocomplete>
 								</v-col>
 								<v-col v-if="!version" cols="12">
-									<v-text-field :rules="[v => !!v]" v-model="documento.codigo" outlined hide-details label="Código"></v-text-field>
+									<v-text-field :rules="[v => !!v]" v-model="documento.codigo" outlined hide-details label="Código">
+										<template v-if="acronimo_tipo_documento || acronimo_seccion" v-slot:prepend-inner>
+											<span class="overline">
+												<!--
+													/*
+														* Primer elemento Tipo de Documento
+														* Segundo elemento Coordinación o Sección
+													*/
+												-->
+												{{ acronimo_tipo_documento }}-{{ acronimo_seccion }}
+											</span>
+											<v-divider class="ml-2 mr-2" vertical></v-divider>
+										</template>
+									</v-text-field>
 								</v-col>
 								<v-col v-if="!version" cols="12">
 									<v-text-field :rules="[v => !!v]" v-model="documento.nombre" outlined hide-details label="Nombre del Documento"></v-text-field>
@@ -32,7 +45,7 @@
 									<v-autocomplete :rules="[v => !!v]" v-model="documento.tipo_almacenamiento" :items="tipos_almacenamiento" outlined hide-details label="Tipo de Almacenamiento"></v-autocomplete>
 								</v-col>
 								<v-col cols="12">
-									<v-autocomplete :rules="[v => !!v]" v-model="documento.elabora" :items="colaboradores" item-text="nombre" item-value="nit" outlined hide-details label="Elabora"></v-autocomplete>
+									<v-autocomplete @change="getAcronimoSeccion(documento.elabora)" :rules="[v => !!v]" v-model="documento.elabora" :items="colaboradores" item-text="nombre" item-value="nit" outlined hide-details label="Elabora"></v-autocomplete>
 								</v-col>
 							</v-row>
 
@@ -138,7 +151,9 @@
 			}),
 			...mapActions({
 				fetchPreview: 'upload_document/fetchPreview',
-				uploadDocument: 'upload_document/uploadDocument'
+				uploadDocument: 'upload_document/uploadDocument',
+				getAcronimoTipo: 'upload_document/getAcronimoTipo',
+				getAcronimoSeccion: 'upload_document/getAcronimoSeccion'
 			}),
 			process(){
 				this.fetchPreview({documento: this.documento, pdf: this.pdf})
@@ -170,7 +185,9 @@
 				processing_preview: state => state.pdf_preview.processing_preview,
 				show_preview: state => state.upload_document.show_preview,
 				uploading: state => state.upload_document.uploading,
-				show_modal: state => state.modal.show
+				show_modal: state => state.modal.show,
+				acronimo_tipo_documento: state => state.upload_document.acronimo_tipo_documento,
+				acronimo_seccion: state => state.upload_document.acronimo_seccion
 			}),
 			enabled_preview(){
 
