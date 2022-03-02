@@ -55,6 +55,8 @@ const mutations = {
 			posicion_vertical: 15,
 			margen_horizontal: 15
 		}
+		state.acronimo_tipo_documento = null
+		state.acronimo_seccion = null
 	},
 	setAcronimoTipo: (state, payload) => {
 		state.acronimo_tipo_documento = payload
@@ -227,9 +229,26 @@ const actions = {
 
 }
 
+const getters = {
+
+	TipoSelect: (state) => (id) => {
+		let result = state.tipos_documento.filter(tipo => tipo.tipodocumentoid == id)
+
+		if (result.length > 0) {
+			
+			return result[0]
+
+		}
+
+		return {}
+	}
+
+}
+
 export default {
 	namespaced,
 	state,
 	mutations,
-	actions
+	actions,
+	getters
 }

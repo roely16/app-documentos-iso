@@ -68,14 +68,28 @@
 								</v-col>
 							</v-row>
 						</v-col>
-						<v-col cols="6">
-							
+						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'" cols="6">
+														
 							<PDFViewer v-if="processing_preview || show_preview" />
 							
 							<ProcessPreview @process="process()" v-if="!processing_preview && !show_preview" :enabled_preview="enabled_preview" />
 							
 						</v-col>
-						<v-col>
+
+						<v-col cols="8" justify="center" v-if="!TipoSelect(documento.tipo_documento).generar_qr && documento.tipo_documento">
+							<QR />
+							<v-row align="center" justify="center">
+								<v-col cols="6">
+									<v-alert icon="mdi-information" prominent text type="info">
+										<span class="overline">
+											El tipo de documento no requiere generar QR.
+										</span>
+									</v-alert>
+								</v-col>
+							</v-row>
+						</v-col>
+
+						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'">
 							<ConfigPDF @process="process()" v-if="processing_preview || show_preview" />
 						</v-col>
 					</v-row>
@@ -101,11 +115,13 @@
 	import PDFViewer from '@/components/PDFViewer'
 	import ProcessPreview from '@/components/UploadDocument/ProcessPreview'
 	import ConfigPDF from '@/components/UploadDocument/ConfigPDF'
+	import QR from '@/components/QR'
 
 	import { 
 		mapState, 
 		mapMutations, 
-		mapActions 
+		mapActions,
+		mapGetters 
 	} from 'vuex'
 
 	export default {
@@ -113,6 +129,7 @@
 			PDFViewer,
 			ProcessPreview,
 			ConfigPDF,
+			QR
 		},
 		props: {
 			version: {
@@ -188,6 +205,9 @@
 				show_modal: state => state.modal.show,
 				acronimo_tipo_documento: state => state.upload_document.acronimo_tipo_documento,
 				acronimo_seccion: state => state.upload_document.acronimo_seccion
+			}),
+			...mapGetters({
+				TipoSelect: 'upload_document/TipoSelect'
 			}),
 			enabled_preview(){
 
