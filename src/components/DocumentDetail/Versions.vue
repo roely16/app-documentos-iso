@@ -8,6 +8,26 @@
 						<Table :data="versions">
 
 							<template #action="item">
+								
+								<v-menu offset-y>
+									<template v-slot:activator="{ on, attrs }">
+										<v-btn v-bind="attrs" v-on="on" color="blue-grey darken-1" icon>
+											<v-icon>
+												mdi-download
+											</v-icon>
+										</v-btn>
+									</template>
+									<v-list>
+										<v-list-item
+											v-for="(option, index) in options_menu"
+											:key="index"
+											:href="option.url + item.documentoid + '/' + option.option" 
+											target="_blank"
+										>
+											<v-list-item-title>{{ option.title }}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
 								<v-btn @click="sendToViewer(item)" icon>
 									<v-icon>
 										mdi-cast
@@ -69,11 +89,18 @@
 			Table,
 			DataCard
 		},
+		data(){
+			return{
+				options: ['PDF', 'Original']
+			}
+		},
 		methods: {
 			...mapActions({
 				fetchVersions: 'document_detail/fetchVersions',
 				sendToViewer: 'document_detail/sendToViewer',
-				fetchSeguimiento: 'document_detail/fetchSeguimiento'
+				fetchSeguimiento: 'document_detail/fetchSeguimiento',
+				fetchFormDocument: 'upload_document/fetchFormDocument',
+				downloadDocument: 'document_detail/downloadDocument'
 			}),
 			...mapMutations({
 				setShow: 'modal/setShow',
@@ -89,7 +116,27 @@
 			...mapState({
 				versions: state => state.document_detail.versions,
 				allow_create_version: state => state.document_detail.allow_create_version
-			})
+			}),
+			options_menu(){
+
+				let options = ['PDF', 'Original']
+
+				let result = []
+
+				options.forEach(option => {
+					
+
+					result.push({
+						title: option, 
+						url: process.env.VUE_APP_API_URL + 'download_document/',
+						option: option.toLowerCase()
+					})
+
+				});
+
+				return result
+
+			}
 		},
 		mounted(){
 

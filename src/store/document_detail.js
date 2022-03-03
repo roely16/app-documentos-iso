@@ -79,6 +79,8 @@ const actions = {
 
 			commit('setDocument', response.data.documento)
 
+			commit('setDetailVersion', response.data.full_document)
+
 			commit('setLoading', false)
 
 			commit('pdf_preview/setPathPreview', response.data.pdf_path, {root: true})
@@ -234,6 +236,19 @@ const actions = {
 		const response = await axios.post(process.env.VUE_APP_API_URL + 'check_qr_document_type', data)
 
 		commit('setMakeQR', response.data.qr)
+
+	},
+
+	async downloadDocument(state, payload){
+
+		const data = {
+			option: payload.option,
+			id: payload.version.documentoid
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'download_document', data)
+
+		console.log(response.data)
 
 	}
 

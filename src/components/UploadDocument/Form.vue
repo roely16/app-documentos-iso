@@ -68,12 +68,12 @@
 								</v-col>
 							</v-row>
 						</v-col>
-						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'" cols="6">
+						<v-col v-if="TipoSelect(documento.tipo_documento ? documento.tipo_documento : detail_version.tipodocumentoid).generar_qr == 'S'" cols="6">
 														
 							<PDFViewer v-if="(processing_preview || show_preview) && !error_pdf" />
 							
 							<ProcessPreview @process="process()" v-if="(!processing_preview && !show_preview) || error_pdf" :enabled_preview="enabled_preview" />
-
+							
 							<v-row v-if="error_pdf">
 								<v-col>
 									<v-alert
@@ -91,7 +91,7 @@
 							
 						</v-col>
 
-						<v-col cols="8" justify="center" v-if="!TipoSelect(documento.tipo_documento).generar_qr && documento.tipo_documento">
+						<v-col cols="8" justify="center" v-if="!TipoSelect(documento.tipo_documento ? documento.tipo_documento : detail_version.tipodocumentoid).generar_qr && documento.tipo_documento">
 							<QR />
 							<v-row align="center" justify="center">
 								<v-col cols="6">
@@ -220,7 +220,8 @@
 				show_modal: state => state.modal.show,
 				acronimo_tipo_documento: state => state.upload_document.acronimo_tipo_documento,
 				acronimo_seccion: state => state.upload_document.acronimo_seccion,
-				error_pdf: state => state.upload_document.error_pdf
+				error_pdf: state => state.upload_document.error_pdf,
+				detail_version: state => state.document_detail.detail_version
 			}),
 			...mapGetters({
 				TipoSelect: 'upload_document/TipoSelect'
