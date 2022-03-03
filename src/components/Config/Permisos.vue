@@ -37,7 +37,7 @@
 			</v-col>
 		</v-row>
 		
-		<Modal width="1000" scrollable>
+		<Modal width="1200" scrollable>
 			<template #content>
 				<Form v-if="form === 'create'"></Form>
 				<FormEdit v-if="form === 'edit'"></FormEdit>
