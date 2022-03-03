@@ -13,6 +13,7 @@ import DocumentDetail from '../views/DocumentDetail.vue'
 import DocumentDetailCheck from '../views/DocumentDetailCheck'
 import Publication from '../views/Publication'
 import RevisionForma from '../views/Revision_Forma'
+import DocumentDetailCheckForma from '../views/DocumentDetailCheckForma.vue'
 import DocumentDetailPub from '../views/DocumentDetailPub'
 import Config from '../views/Config'
 import NoAccess from '../views/NoAccess'
@@ -165,6 +166,30 @@ const routes = [
 							href: '#/',
 						}
 					]
+				}
+			},
+			{
+				path: '/home/revision_forma/detalle_documento/:id',
+				name: 'document_detail_check_forma',
+				component: DocumentDetailCheckForma,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Verificar Documentos',
+							disabled: false,
+							href: '#/home/revision_forma',
+						},
+						{
+							text: 'Detalle',
+							disabled: true,
+							href: '#/',
+						}
+					],
 				}
 			},
 			{

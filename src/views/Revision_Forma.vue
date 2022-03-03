@@ -16,7 +16,7 @@
 							text
 							small
 							color="primary"
-							:to="{name: 'document_detail_check', params: {id: item.documentoid}}"
+							:to="{name: 'document_detail_check_forma', params: {id: item.documentoid}}"
 						>
 							<v-icon>mdi-information</v-icon>
 						</v-btn>
