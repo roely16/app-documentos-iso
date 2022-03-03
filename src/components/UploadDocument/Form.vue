@@ -70,9 +70,24 @@
 						</v-col>
 						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'" cols="6">
 														
-							<PDFViewer v-if="processing_preview || show_preview" />
+							<PDFViewer v-if="(processing_preview || show_preview) && !error_pdf" />
 							
-							<ProcessPreview @process="process()" v-if="!processing_preview && !show_preview" :enabled_preview="enabled_preview" />
+							<ProcessPreview @process="process()" v-if="(!processing_preview && !show_preview) || error_pdf" :enabled_preview="enabled_preview" />
+
+							<v-row v-if="error_pdf">
+								<v-col>
+									<v-alert
+										prominent
+										type="error"
+										text
+										icon="mdi-alert-circle"
+									>
+										<span class="overline">
+											El documento se encuentra en un formato que no es compatible.  Probar de nuevo con un nuevo documento.
+										</span>
+									</v-alert>
+								</v-col>
+							</v-row>
 							
 						</v-col>
 
@@ -90,7 +105,7 @@
 						</v-col>
 
 						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'">
-							<ConfigPDF @process="process()" v-if="processing_preview || show_preview" />
+							<ConfigPDF @process="process()" v-if="(processing_preview || show_preview) && !error_pdf" />
 						</v-col>
 					</v-row>
 				</v-form>
@@ -98,7 +113,7 @@
 			<v-card-actions>
 				<v-row dense>
 					<v-col>
-						<v-btn :disabled="uploading" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
+						<v-btn :disabled="uploading || error_pdf" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
 							Aceptar
 						</v-btn>
 						<v-btn :disabled="uploading" @click="setShow(false)" elevation="0" color="error" large>
@@ -204,7 +219,8 @@
 				uploading: state => state.upload_document.uploading,
 				show_modal: state => state.modal.show,
 				acronimo_tipo_documento: state => state.upload_document.acronimo_tipo_documento,
-				acronimo_seccion: state => state.upload_document.acronimo_seccion
+				acronimo_seccion: state => state.upload_document.acronimo_seccion,
+				error_pdf: state => state.upload_document.error_pdf
 			}),
 			...mapGetters({
 				TipoSelect: 'upload_document/TipoSelect'
