@@ -12,6 +12,7 @@ import Check from '../views/Check.vue'
 import DocumentDetail from '../views/DocumentDetail.vue'
 import DocumentDetailCheck from '../views/DocumentDetailCheck'
 import Publication from '../views/Publication'
+import RevisionForma from '../views/Revision_Forma'
 import DocumentDetailPub from '../views/DocumentDetailPub'
 import Config from '../views/Config'
 import NoAccess from '../views/NoAccess'
@@ -108,6 +109,25 @@ const routes = [
 						},
 						{
 							text: 'Publicar Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/revision_forma',
+				name: 'revision_forma',
+				component: RevisionForma,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Verificar Documentos',
 							disabled: true,
 							href: '#/',
 						}
