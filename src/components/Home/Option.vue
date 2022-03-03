@@ -5,7 +5,7 @@
 				<v-card-text>
 					<lottie :options="{
 						animationData: require('@/assets/lottie/' + data.icon)	
-					}" :height="100"/>
+					}" :height="200"/>
 				</v-card-text>
 				<v-card-text :class="['text-h5', 'font-weight-bold', 'text-center', 'mt-0', 'pt-0', hover ? 'white--text': null]">
 					{{ title }}
