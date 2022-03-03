@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<object v-if="!processing_preview" :data="path ? path : path_preview" type="application/pdf" width="100%" :height="height" />
+		<object :style="fullscreen ? 'min-height: 85vh' : null" v-if="!processing_preview" :data="path ? path : path_preview" type="application/pdf" width="100%" :height="height" />
 
 		<Uploading :height="height_loading" v-if="processing_preview" />
 
@@ -16,11 +16,15 @@
 	export default {
 		props: {
 			height: {
-				type: Number,
+				type: [Number, String],
 				default: 600
 			},
 			height_loading: Number,
-			path: String
+			path: String,
+			fullscreen: {
+				type: Boolean,
+				default: false
+			}
 		},
 		computed: {
 			...mapState({

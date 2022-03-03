@@ -12,7 +12,7 @@
 		</v-card-title>
 		<v-divider></v-divider>
 		<v-card-text class="mt-5">
-			<PDFViewer />
+			<PDFViewer fullscreen />
 		</v-card-text>
 	</v-card>
 </template>

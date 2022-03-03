@@ -71,7 +71,7 @@
 			</v-card-text>
 		</v-card>
 		
-		<Modal :fullscreen="modal_content === 'form_version' || modal_content === 'form_detail_version' ? true : false" :scrollable="true" max_width="100px" width="900">
+		<Modal fullscreen :scrollable="true" max_width="100px" width="900">
 			<template #content>
 				<FullScreenPDF v-if="modal_content === 'pdf_preview'" />
 				<FormVersion :fetchParams="fetchParams" fetchRoot :fetchData="fetchData" version v-if="modal_content === 'form_version'"></FormVersion>
