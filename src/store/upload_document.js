@@ -20,7 +20,8 @@ const state = {
 	},
 	uploading: false,
 	acronimo_tipo_documento: null,
-	acronimo_seccion: null
+	acronimo_seccion: null,
+	error_pdf: false
 }
 
 const mutations = {
@@ -57,12 +58,16 @@ const mutations = {
 		}
 		state.acronimo_tipo_documento = null
 		state.acronimo_seccion = null
+		state.error_pdf = false
 	},
 	setAcronimoTipo: (state, payload) => {
 		state.acronimo_tipo_documento = payload
 	},
 	setAcronimoSeccion: (state, payload) => {
 		state.acronimo_seccion = payload
+	},
+	setErrorPDF: (state, payload) => {
+		state.error_pdf = payload
 	}
 }
 
@@ -137,6 +142,9 @@ const actions = {
 			commit('pdf_preview/setPathPreview', response.data.path_preview, {root: true})
 
 			commit('pdf_preview/setProcessingPreview', false, {root: true})
+
+			commit('setErrorPDF', response.data.error_pdf)
+
 			commit('setShowPreview', true)
 
 		} catch (error) {
