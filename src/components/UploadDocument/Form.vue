@@ -21,7 +21,7 @@
 								</v-col>
 								<v-col v-if="!version" cols="12">
 									<v-text-field :rules="[v => !!v]" v-model="documento.codigo" outlined hide-details label="Código">
-										<template v-if="acronimo_tipo_documento || acronimo_seccion" v-slot:prepend-inner>
+										<template v-slot:prepend-inner>
 											<span class="overline">
 												<!--
 													/*
@@ -29,7 +29,7 @@
 														* Segundo elemento Coordinación o Sección
 													*/
 												-->
-												{{ acronimo_tipo_documento }}-{{ acronimo_seccion }}
+												{{ acronimo_tipo_documento ? acronimo_tipo_documento : 'XX' }}-{{ acronimo_seccion ? acronimo_seccion : 'XX' }}
 											</span>
 											<v-divider class="ml-2 mr-2" vertical></v-divider>
 										</template>
