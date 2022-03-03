@@ -239,19 +239,6 @@ const actions = {
 
 	},
 
-	async downloadDocument(state, payload){
-
-		const data = {
-			option: payload.option,
-			id: payload.version.documentoid
-		}
-
-		const response = await axios.post(process.env.VUE_APP_API_URL + 'download_document', data)
-
-		console.log(response.data)
-
-	}
-
 }
 
 export default {

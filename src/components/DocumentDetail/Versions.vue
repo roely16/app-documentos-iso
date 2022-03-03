@@ -100,7 +100,6 @@
 				sendToViewer: 'document_detail/sendToViewer',
 				fetchSeguimiento: 'document_detail/fetchSeguimiento',
 				fetchFormDocument: 'upload_document/fetchFormDocument',
-				downloadDocument: 'document_detail/downloadDocument'
 			}),
 			...mapMutations({
 				setShow: 'modal/setShow',
