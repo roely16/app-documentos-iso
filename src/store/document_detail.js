@@ -15,7 +15,8 @@ const state = {
 	saving_bitacora: false,
 	comentario: null,
 	adjuntos: [],
-	cambio_estado: null
+	cambio_estado: null,
+	make_qr: false
 }
 
 const mutations = {
@@ -56,6 +57,9 @@ const mutations = {
 	},
 	setCambioEstado: (state, payload) => {
 		state.cambio_estado = payload
+	},
+	setMakeQR: (state, payload) => {
+		state.make_qr = payload
 	}
 }
 
@@ -196,8 +200,6 @@ const actions = {
 
 		const response = await axios.post(process.env.VUE_APP_API_URL + 'get_bitacora', data)
 
-		console.log(response.data)
-
 		commit('setBitacora', response.data)
 
 	},
@@ -220,6 +222,18 @@ const actions = {
 		dispatch('fetchBitacora')
 		
 		commit('modal/setShow', true, {root: true})
+
+	},
+
+	async fetchMakeQR({state, commit}){
+
+		const data = {
+			tipo_documento: state.detail_version.tipodocumentoid
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'check_qr_document_type', data)
+
+		commit('setMakeQR', response.data.qr)
 
 	}
 

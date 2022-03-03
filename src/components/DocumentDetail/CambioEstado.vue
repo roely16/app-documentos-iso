@@ -44,6 +44,7 @@
 							item-value="estadoid"
 							outlined
 							hide-details
+							@change="fetchMakeQR()"
 						>
 							<template v-slot:selection="data">
 								<v-chip
@@ -80,7 +81,7 @@
 					</v-col>
 				</v-row>
 
-				<v-row v-if="alert_msg.alert_message">
+				<v-row v-if="alert_msg.alert_message && make_qr">
 					<v-col>
 						<v-alert
 							icon="mdi-information"
@@ -105,7 +106,8 @@
 
 		methods: {
 			...mapActions({
-				changeState: 'document_detail/changeState'
+				changeState: 'document_detail/changeState',
+				fetchMakeQR: 'document_detail/fetchMakeQR'
 			}),
 			...mapMutations({
 				setComentario: 'document_detail/setComentario',
@@ -117,7 +119,8 @@
 		computed: {
 			...mapState({
 				saving_bitacora: state => state.document_detail.saving_bitacora,
-				detail_version: state => state.document_detail.detail_version
+				detail_version: state => state.document_detail.detail_version,
+				make_qr: state => state.document_detail.make_qr
 			}),
 			comentario: {
 				get(){
