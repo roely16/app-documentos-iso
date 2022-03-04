@@ -95,14 +95,6 @@
 		},
 		mounted(){
 
-			if (!this.area) {
-				
-				const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
-
-				this.setArea(userData.codarea)
-
-			}
-
 			this.fetchData()
 
 		}

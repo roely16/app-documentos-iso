@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import store from '@/store'
+
 /* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -280,11 +282,11 @@ router.beforeEach(async (to, from, next) => {
 
 		let url_split = to.path.split("/")
 
-		console.log(url_split)
-
 		// Validar que el usuario tenga acceso a la página
 		if (to.name != 'home' && to.name != 'no_access') {
 			
+			store.commit('routes/setModule', url_split[2], {root: true})
+
 			const data = {
 				user: usuario.nit,
 				url: url_split[2]

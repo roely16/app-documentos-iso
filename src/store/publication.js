@@ -20,10 +20,14 @@ const actions = {
 
 	async fetchData({commit, rootState}){
 
+		const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+
 		commit('table/setLoading', true, {root: true})
 			
 		const data = {
-			area: rootState.filter.area
+			area: rootState.filter.area,
+			usuario: userData.usuario,
+			module: rootState.routes.module
 		}
 
 		const response = await axios.post(process.env.VUE_APP_API_URL + 'fetch_documents_publication', data)
