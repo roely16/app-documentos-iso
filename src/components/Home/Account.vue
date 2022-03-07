@@ -1,5 +1,8 @@
 <template>
-		
+	<div>
+		<v-avatar>
+			<v-img :src="require('@/assets/img/logo_muni_verde.png')"></v-img>
+		</v-avatar>
 		<v-menu bottom offset-y>
 			<template v-slot:activator="{ on, attrs }">
 				<v-btn
@@ -8,16 +11,8 @@
 					v-on="on"
 					elevation="0"
 				>
-					<!--
-
-						/** 
-							* TODO: Corregir el botón para que se adapte a la foto de perfil
-						*/
-
-					-->
-					<!-- <v-avatar>
-					</v-avatar> -->
-					<lottie :height="100" :options="defaultOptions" />
+					
+					
 					<span>
 						{{ userData.usuario }}
 					</span>
@@ -37,29 +32,21 @@
 				</v-list-item>
 			</v-list>
 		</v-menu>
+		</div>
 </template>
 
 <script>
 
 	import { mapActions } from "vuex"
 
-	import Lottie from 'vue-lottie'
-
 	export default {
-		components: {
-			'lottie': Lottie
-		},
+		
 		data(){
 
 			let self = this
 
 			return{
 				options: [
-					// { 
-					// 	title: 'Configuración',
-					// 	icon: 'mdi-cog',
-					// 	onPress: () => { console.log('configuration') } 
-					// },
 					{ 
 						title: 'Salir',
 						icon: 'mdi-logout',
