@@ -15,8 +15,9 @@ const state = {
 	settings: {
 		lineas_nombre: 1,
 		lineas_puesto: 1,
-		posicion_vertical: 15,
-		margen_horizontal: 15
+		posicion_vertical: 300,
+		margen_horizontal: 15,
+		altura_fila: 30
 	},
 	uploading: false,
 	acronimo_tipo_documento: null,

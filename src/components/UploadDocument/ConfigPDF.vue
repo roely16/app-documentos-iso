@@ -14,6 +14,10 @@
 							<span class="font-weight-bold">Margen Horizontal</span>
 							<v-text-field v-model="settings.margen_horizontal" hide-details dense outlined type="number"></v-text-field>
 						</v-col>
+						<v-col cols="12">
+							<span class="font-weight-bold">Altura de Fila</span>
+							<v-text-field v-model="settings.altura_fila" hide-details dense outlined type="number"></v-text-field>
+						</v-col>
 						<v-col align="center">
 							<v-btn @click="process()" elevation="0">
 								Vista Previa
