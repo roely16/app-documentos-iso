@@ -103,8 +103,7 @@
 								</v-col>
 							</v-row>
 						</v-col>
-
-						<v-col v-if="TipoSelect(documento.tipo_documento).generar_qr == 'S'">
+						<v-col v-if="TipoSelect(documento.tipo_documento ?  documento.tipo_documento : detail_version.tipodocumentoid).generar_qr == 'S'">
 							<ConfigPDF @process="process()" v-if="(processing_preview || show_preview) && !error_pdf" />
 						</v-col>
 					</v-row>
