@@ -19,6 +19,7 @@ import DocumentDetailCheckForma from '../views/DocumentDetailCheckForma.vue'
 import DocumentDetailPub from '../views/DocumentDetailPub'
 import Config from '../views/Config'
 import NoAccess from '../views/NoAccess'
+import Depuration from '../views/Depuration'
 
 Vue.use(VueRouter)
 
@@ -265,7 +266,26 @@ const routes = [
 						}
 					],
 				}
-			}
+			},
+			{
+				path: '/home/depuracion',
+				name: 'depuration',
+				component: Depuration,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Depuración de Documentos',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
 		]
 	}
 ]
