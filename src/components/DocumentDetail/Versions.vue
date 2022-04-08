@@ -3,9 +3,13 @@
 		<v-row>
 			<v-col>
 				<DataCard :outlined="false" :elevation="0">
-					{{ versions }}
+
+					<template #search>
+						<v-text-field v-model="search" hide-details clearable prepend-inner-icon="mdi-magnify" placeholder="Buscar..." outlined class="input-rounded"></v-text-field>
+					</template>
+
 					<template #table>
-						<Table :data="versions">
+						<Table :data="versions" :search_prop="search" external_search>
 
 							<template #action="item">
 								
@@ -91,7 +95,8 @@
 		},
 		data(){
 			return{
-				options: ['PDF', 'Original']
+				options: ['PDF', 'Original'],
+				search: ''
 			}
 		},
 		methods: {

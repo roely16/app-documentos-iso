@@ -1,5 +1,6 @@
 <template>
 	<div>
+		{{ search_prop }}
 		<v-data-table
 			:headers="data.headers"
 			:items="data.items"
@@ -9,7 +10,7 @@
 			@page-count="(value) => setPageCount(value)"
 			:page="page"
 			hide-default-footer
-			:search="!search_prop ? search : search_prop"
+			:search="external_search ? search_prop : search"
 		>
 
 			<template v-for="(item_table, key) in data.headers" v-slot:[getSlotName(item_table)]="{ item, header }">
@@ -56,7 +57,11 @@
 	export default {
 		props: {
 			data: Object,
-			search_prop: String
+			search_prop: String,
+			external_search: {
+				type: Boolean,
+				default: false
+			}
 		},
 		components: {
 			Loading,
