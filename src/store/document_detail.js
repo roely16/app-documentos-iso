@@ -16,7 +16,8 @@ const state = {
 	comentario: null,
 	adjuntos: [],
 	cambio_estado: null,
-	make_qr: false
+	make_qr: false,
+	document_info_edit: {}
 }
 
 const mutations = {
@@ -60,6 +61,9 @@ const mutations = {
 	},
 	setMakeQR: (state, payload) => {
 		state.make_qr = payload
+	},
+	setDocumentInfoEdit: (state, payload) => {
+		state.document_info_edit = payload
 	}
 }
 
@@ -238,6 +242,43 @@ const actions = {
 		commit('setMakeQR', response.data.qr)
 
 	},
+
+	async fetchEditInfo({commit}, payload){
+		
+		const data = {
+			id: payload
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'get_detail_edit', data)
+		
+		commit('setDocumentInfoEdit', response.data)
+
+		commit('modal/setModalContent', 'edit_info', {root: true})
+		commit('modal/setFullScreen', false, {root: true})
+		commit('modal/setShow', true, {root: true})
+
+	},
+
+	async fetchUpdateInfo({state, commit, dispatch}){
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'update_detail_info', state.document_info_edit)
+
+		if (response.status === 200) {
+			
+			Swal.fire(
+				'Excelente!',
+				'La información del documento ha sido actualizada!',
+				'success'
+			).then(() => {
+
+				commit('modal/setShow', false, {root: true})
+				dispatch('fetchDetail', state.document_info_edit.documentoid)
+
+			})
+
+		}
+
+	}
 
 }
 

@@ -1,34 +1,50 @@
 <template>
 	<div class="mb-4">
 		<v-row align="center" v-for="(value, label) in document" :key="label">
-				<v-col class="pb-1" cols="4">
-					<h3 class="text-capitalize">
-						{{ label }}:
+			<v-col class="pb-1" cols="4">
+				<h3 class="text-capitalize">
+					{{ label }}:
+				</h3>
+			</v-col>
+			<v-col class="pb-1">
+				<slot v-bind="{ label, value }" :name="label">
+					<h3 class="font-weight-light">
+						{{ value }}
 					</h3>
-				</v-col>
-				<v-col class="pb-1">
-					<slot v-bind="{ label, value }" :name="label">
-						<h3 class="font-weight-light">
-							{{ value }}
-						</h3>
-					</slot>
-				</v-col>
-
+				</slot>
+			</v-col>
+		</v-row>
+		<v-row class="text-right">
+			<v-col class="mb-0 pb-0" cols="12">
+				<v-btn @click="fetchEditInfo(id)" color="primary" small text>Editar
+					<v-icon right>
+						mdi-pencil
+					</v-icon>
+				</v-btn>
+			</v-col>
 		</v-row>
 	</div>
 </template>
 
 <script>
 
-	import { mapState } from "vuex"
+	import { mapState, mapActions } from "vuex"
 
 	export default {
-
+		
+		methods: {
+			...mapActions({
+				fetchEditInfo: 'document_detail/fetchEditInfo'
+			}),
+		},
 		computed: {
 
 			...mapState({
 				document: state => state.document_detail.document
-			})
+			}),
+			id: function(){
+				return this.$route.params.id
+			}
 
 		}
 

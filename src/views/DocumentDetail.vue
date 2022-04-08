@@ -71,11 +71,12 @@
 			</v-card-text>
 		</v-card>
 		
-		<Modal fullscreen :scrollable="true" max_width="100px" width="900">
+		<Modal :fullscreen="fullscreen" :scrollable="true" max_width="100px" width="900">
 			<template #content>
 				<FullScreenPDF v-if="modal_content === 'pdf_preview'" />
 				<FormVersion :fetchParams="fetchParams" fetchRoot :fetchData="fetchData" version v-if="modal_content === 'form_version'"></FormVersion>
 				<FormDetailVersion :show_update="show_update" v-if="modal_content === 'form_detail_version'" />
+				<FormEditInfo v-if="modal_content === 'edit_info'" />
 			</template>
 		</Modal>
 	</div>
@@ -91,6 +92,7 @@
 	import FullScreenPDF from '@/components/DocumentDetail/PDFPreview'
 	import FormVersion from '@/components/UploadDocument/Form'
 	import FormDetailVersion from '@/components/DocumentDetail/FormDetailVersion'
+	import FormEditInfo from '@/components/DocumentDetail/FormEditInfo'
 
 	import { mapState, mapActions, mapMutations } from 'vuex'
 
@@ -113,7 +115,8 @@
 			Versions,
 			FullScreenPDF,
 			FormVersion,
-			FormDetailVersion
+			FormDetailVersion,
+			FormEditInfo
 		},
 		data(){
 			return{
@@ -138,7 +141,8 @@
 			...mapState({
 				loading: state => state.document_detail.loading,
 				modal_content: state => state.modal.modal_content,
-				preview_version: state => state.document_detail.preview_version
+				preview_version: state => state.document_detail.preview_version,
+				fullscreen: state => state.modal.fullscreen
 			})
 		},
 		mounted(){
