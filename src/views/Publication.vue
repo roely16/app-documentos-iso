@@ -3,13 +3,17 @@
 	<div>
 		<DataCard>
 
+			<template #search>
+				<v-text-field v-model="search" hide-details clearable prepend-inner-icon="mdi-magnify" placeholder="Buscar..." outlined class="input-rounded"></v-text-field>
+			</template>
+
 			<template #table>
 
 				<!-- Filtro -->
 
 				<Filtro @update="fetchData()" />
 
-				<Table :data="data_table">
+				<Table :search_prop="search" external_search :data="data_table">
 
 					<template #action="item">
 						<v-btn
@@ -67,7 +71,8 @@
 		},
 		data(){
 			return{
-				fetchDataAction: 'fetchData'
+				fetchDataAction: 'fetchData',
+				search: null
 			}
 		},
 		methods: {

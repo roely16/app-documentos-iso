@@ -1,6 +1,5 @@
 <template>
 	<div>
-		{{ search_prop }}
 		<v-data-table
 			:headers="data.headers"
 			:items="data.items"
