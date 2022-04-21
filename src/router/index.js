@@ -314,6 +314,8 @@ router.beforeEach(async (to, from, next) => {
 	
 			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_access', data)
 
+			store.commit('routes/setPermissions', response.data)
+
 			if (!response.data.access) {
 				
 				return next('/home/no_access');

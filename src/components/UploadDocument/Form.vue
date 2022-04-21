@@ -35,6 +35,11 @@
 										</template>
 									</v-text-field>
 								</v-col>
+								<v-col cols="12">
+									<v-alert prominent type="error" dense>
+										El código asignado al documento ya ha sido utilizado.  Por favor elija otro. 
+									</v-alert>
+								</v-col>
 								<v-col v-if="!version" cols="12">
 									<v-text-field :rules="[v => !!v]" v-model="documento.nombre" outlined hide-details label="Nombre del Documento"></v-text-field>
 								</v-col>

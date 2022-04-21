@@ -14,8 +14,14 @@
 				</slot>
 			</v-col>
 		</v-row>
-		<v-row class="text-right">
+		<v-row v-if="permissions.editable" class="text-right">
 			<v-col class="mb-0 pb-0" cols="12">
+				<v-btn color="error" small text>
+					Eliminar
+					<v-icon right>
+						mdi-delete
+					</v-icon>
+				</v-btn>
 				<v-btn @click="fetchEditInfo(id)" color="primary" small text>Editar
 					<v-icon right>
 						mdi-pencil
@@ -40,7 +46,8 @@
 		computed: {
 
 			...mapState({
-				document: state => state.document_detail.document
+				document: state => state.document_detail.document,
+				permissions: state => state.routes.permissions 
 			}),
 			id: function(){
 				return this.$route.params.id
