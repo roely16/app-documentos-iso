@@ -35,9 +35,9 @@
 										</template>
 									</v-text-field>
 								</v-col>
-								<v-col cols="12">
-									<v-alert prominent type="error" dense>
-										El código asignado al documento ya ha sido utilizado.  Por favor elija otro. 
+								<v-col v-if="Object.keys(code_alert).length != 0" cols="12">
+									<v-alert class="mb-0" prominent :type="code_alert.type" dense>
+										{{ code_alert.message }}
 									</v-alert>
 								</v-col>
 								<v-col v-if="!version" cols="12">
@@ -50,7 +50,7 @@
 									<v-autocomplete :rules="[v => !!v]" v-model="documento.tipo_almacenamiento" :items="tipos_almacenamiento" outlined hide-details label="Tipo de Almacenamiento"></v-autocomplete>
 								</v-col>
 								<v-col cols="12">
-									<v-autocomplete @change="getAcronimoSeccion(documento.elabora)" :rules="[v => !!v]" v-model="documento.elabora" :items="colaboradores" item-text="nombre" item-value="nit" outlined hide-details label="Elabora"></v-autocomplete>
+									<v-autocomplete :rules="[v => !!v]" v-model="documento.elabora" :items="colaboradores" item-text="nombre" item-value="nit" outlined hide-details label="Elabora"></v-autocomplete>
 								</v-col>
 							</v-row>
 
@@ -117,7 +117,7 @@
 			<v-card-actions>
 				<v-row dense>
 					<v-col>
-						<v-btn :disabled="uploading || error_pdf" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
+						<v-btn :disabled="uploading || error_pdf || !code_alert.available" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
 							Aceptar
 						</v-btn>
 						<v-btn :disabled="uploading" @click="setShow(false)" elevation="0" color="error" large>
@@ -189,7 +189,8 @@
 				fetchPreview: 'upload_document/fetchPreview',
 				uploadDocument: 'upload_document/uploadDocument',
 				getAcronimoTipo: 'upload_document/getAcronimoTipo',
-				getAcronimoSeccion: 'upload_document/getAcronimoSeccion'
+				getAcronimoSeccion: 'upload_document/getAcronimoSeccion',
+				checkCode: 'upload_document/checkCode'
 			}),
 			process(){
 				this.fetchPreview({documento: this.documento, pdf: this.pdf})
@@ -225,7 +226,8 @@
 				acronimo_tipo_documento: state => state.upload_document.acronimo_tipo_documento,
 				acronimo_seccion: state => state.upload_document.acronimo_seccion,
 				error_pdf: state => state.upload_document.error_pdf,
-				detail_version: state => state.document_detail.detail_version
+				detail_version: state => state.document_detail.detail_version,
+				code_alert: state => state.upload_document.code_alert
 			}),
 			...mapGetters({
 				TipoSelect: 'upload_document/TipoSelect'
@@ -254,7 +256,17 @@
 					
 				}
 				
+			},
+			'documento.codigo': function(val){
+
+				this.checkCode(val)
+
 			}
+		},
+		mounted(){
+
+			this.getAcronimoSeccion()
+
 		}
 	}
 </script>

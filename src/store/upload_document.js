@@ -22,7 +22,8 @@ const state = {
 	uploading: false,
 	acronimo_tipo_documento: null,
 	acronimo_seccion: null,
-	error_pdf: false
+	error_pdf: false,
+	code_alert: {}
 }
 
 const mutations = {
@@ -60,6 +61,7 @@ const mutations = {
 		state.acronimo_tipo_documento = null
 		state.acronimo_seccion = null
 		state.error_pdf = false
+		state.code_alert = {}
 	},
 	setAcronimoTipo: (state, payload) => {
 		state.acronimo_tipo_documento = payload
@@ -69,6 +71,9 @@ const mutations = {
 	},
 	setErrorPDF: (state, payload) => {
 		state.error_pdf = payload
+	},
+	setCodeAlert: (state, payload) => {
+		state.code_alert = payload
 	}
 }
 
@@ -220,19 +225,33 @@ const actions = {
 		}
 
 	},
-	async getAcronimoSeccion({commit}, payload){
+	async getAcronimoSeccion({commit}){
 
-		if (payload) {
+		const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+
+		const data = {
+			colaborador: userData.nit
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'get_acronimo_seccion', data)
+
+		commit('setAcronimoSeccion', response.data)
+
+	},
+	async checkCode({state, commit}, payload){
+
+		if (state.acronimo_seccion && state.acronimo_tipo_documento) {
 			
 			const data = {
-				colaborador: payload
+				code: state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload
 			}
-	
-			const response = await axios.post(process.env.VUE_APP_API_URL + 'get_acronimo_seccion', data)
-	
-			commit('setAcronimoSeccion', response.data)
+
+			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_code', data)
+
+			commit('setCodeAlert', response.data)
 
 		}
+		
 
 	}
 
