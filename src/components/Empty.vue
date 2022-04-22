@@ -1,6 +1,5 @@
 <template>
 	<lottie :options="defaultOptions" :height="height"></lottie>
-	
 </template>
 
 <script>

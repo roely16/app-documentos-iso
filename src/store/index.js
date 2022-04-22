@@ -16,6 +16,7 @@ import check from './check'
 import publication from './publication'
 import permission from './permission'
 import routes from './routes'
+import depuration from './depuration'
 
 export default new Vuex.Store({
 	state: {
@@ -37,6 +38,7 @@ export default new Vuex.Store({
 		check: check,
 		publication: publication,
 		permission: permission,
-		routes: routes
+		routes: routes,
+		depuration: depuration
 	}
 })

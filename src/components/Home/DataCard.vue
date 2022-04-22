@@ -7,8 +7,6 @@
 						<slot name="search">
 							<v-text-field v-model="search" hide-details clearable prepend-inner-icon="mdi-magnify" placeholder="Buscar..." outlined class="input-rounded"></v-text-field>
 						</slot>
-
-						
 					</v-col>
 					<v-col class="text-right">
 						<slot name="action">
