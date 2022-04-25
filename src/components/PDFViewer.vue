@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<object :style="fullscreen ? 'min-height: 85vh' : null" v-if="!processing_preview" :data="path ? path : path_preview" type="application/pdf" width="100%" :height="height" />
+		<object :style="fullscreen ? 'min-height: 85vh' : null" v-if="!processing_preview" :data="path ? env + path : env + path_preview" type="application/pdf" width="100%" :height="height" />
 
 		<Uploading :height="height_loading" v-if="processing_preview" />
 
@@ -30,7 +30,10 @@
 			...mapState({
 				processing_preview: state => state.pdf_preview.processing_preview,
 				path_preview: state => state.pdf_preview.path_preview
-			})
+			}),
+			env: function(){
+				return process.env.VUE_APP_API_URL
+			}
 		},
 		components: { 
 			Uploading 
