@@ -36,11 +36,8 @@
 				<v-card elevation="0" v-for="(document, key) in document_paginated" :key="key">
 					<v-card-text>
 						<v-row justify="center" align="center">
-							<v-col>
-								<v-checkbox v-model="document.checked" hide-details dense></v-checkbox>
-							</v-col>
-							<v-col cols="11">
-								{{ document.nombre }}
+							<v-col cols="12">
+								<v-checkbox :label="document.nombre" v-model="document.checked" hide-details dense></v-checkbox>
 							</v-col>
 						</v-row>
 					</v-card-text>
