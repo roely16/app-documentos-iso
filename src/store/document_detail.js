@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import Swal from 'sweetalert2'
 
+import router from '../router'
+
 const namespaced = true
 
 const state = {
@@ -269,6 +271,32 @@ const actions = {
 
 				commit('modal/setShow', false, {root: true})
 				dispatch('fetchDetail', state.document_info_edit.documentoid)
+
+			})
+
+		}
+
+	},
+
+	async fetchDeleteDocument(state, payload){
+
+		const data = {
+			id: payload
+		}
+
+		const response = await axios.post(process.env.VUE_APP_API_URL + 'delete_document', data)
+
+		console.log(response.data)
+
+		if (response.data.deleted > 0) {
+			
+			Swal.fire(
+				'Excelente!',
+				'El documento ha sido eliminado exitosamente.',
+				'success'
+			).then(() => {
+
+				router.push('/home/subir_documento')
 
 			})
 
