@@ -116,8 +116,6 @@ const actions = {
 
 		commit('setAllowCreateVersion', response.data.allow_create_version)
 
-		console.log(state.document)
-
 	},
 
 	async sendToViewer({commit}, payload){
@@ -169,9 +167,7 @@ const actions = {
 
 			formData.append('data', JSON.stringify(data))
 			
-			const response = await axios.post(process.env.VUE_APP_API_URL + 'change_state', formData)
-
-			console.log(response.data)
+			await axios.post(process.env.VUE_APP_API_URL + 'change_state', formData)
 
 			dispatch('fetchBitacora')
 

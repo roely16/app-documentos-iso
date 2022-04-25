@@ -238,12 +238,16 @@ const actions = {
 		commit('setAcronimoSeccion', response.data)
 
 	},
-	async checkCode({state, commit}, payload){
+	async checkCode({state, commit, rootState}, payload){
 
-		if (state.acronimo_seccion && state.acronimo_tipo_documento) {
+		if ((state.acronimo_seccion && state.acronimo_tipo_documento) || payload.edit) {
 			
+			let code = payload.edit ? rootState.document_detail.document_info_edit.codigo_tipo + '-' + rootState.document_detail.document_info_edit.codigo_seccion + '-' + payload.value : state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload
+
 			const data = {
-				code: state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload
+				code: code,
+				edit: payload.edit,
+				id: rootState.document_detail.document_info_edit.documentoid
 			}
 
 			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_code', data)
