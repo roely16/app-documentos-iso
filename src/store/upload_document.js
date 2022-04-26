@@ -244,10 +244,13 @@ const actions = {
 			
 			let code = payload.edit ? rootState.document_detail.document_info_edit.codigo_tipo + '-' + rootState.document_detail.document_info_edit.codigo_seccion + '-' + payload.value : state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload
 
+			const userData = JSON.parse(localStorage.getItem('app-documentos-iso'))
+
 			const data = {
 				code: code,
 				edit: payload.edit,
-				id: rootState.document_detail.document_info_edit.documentoid
+				id: rootState.document_detail.document_info_edit.documentoid,
+				codarea: userData.codarea
 			}
 
 			const response = await axios.post(process.env.VUE_APP_API_URL + 'check_code', data)
