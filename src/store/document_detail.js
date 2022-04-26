@@ -122,20 +122,7 @@ const actions = {
 
 	async sendToViewer({commit}, payload){
 		
-		commit('pdf_preview/setProcessingPreview', true, {root: true})
-
-		const data = {
-			id: payload.documentoid,
-			preview: true
-		}
-
-		const response = await axios.post(process.env.VUE_APP_API_URL + 'get_detail_document', data)
-
-		commit('pdf_preview/setPathPreview', response.data.pdf_path, {root: true})
-
-		commit('setPreviewVersion', payload.version )
-
-		commit('pdf_preview/setProcessingPreview', false, {root: true})
+		commit('pdf_preview/setPathPreview', payload.documento, {root: true})
 
 	},
 
