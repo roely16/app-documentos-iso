@@ -117,7 +117,7 @@
 			<v-card-actions>
 				<v-row dense>
 					<v-col>
-						<v-btn :disabled="uploading || error_pdf || !code_alert.available" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
+						<v-btn :disabled="(uploading || error_pdf || !code_alert.available) && !version" :loading="uploading" @click="upload()" elevation="0" color="primary" large class="mr-2">
 							Aceptar
 						</v-btn>
 						<v-btn :disabled="uploading" @click="setShow(false)" elevation="0" color="error" large>
