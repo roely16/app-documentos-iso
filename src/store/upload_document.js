@@ -176,7 +176,7 @@ const actions = {
 			formData.append('file_preview', payload.pdf)
 
 			// Formar el código del documento
-			payload.documento.codigo = state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload.documento.codigo
+			payload.documento.codigo = state.acronimo_tipo_documento + '-' + state.acronimo_seccion + '-' + payload.documento.codigo_zeros
 
 			formData.append('documento', JSON.stringify(payload.documento))
 			formData.append('settings', JSON.stringify(state.settings))
