@@ -20,7 +20,7 @@
 									<v-autocomplete @change="getAcronimoTipo(documento.tipo_documento)" :rules="[v => !!v]" v-model="documento.tipo_documento" :items="tipos_documento" item-text="nombre" item-value="tipodocumentoid" outlined hide-details label="Tipo de Documento"></v-autocomplete>
 								</v-col>
 								<v-col v-if="!version" cols="12">
-									<v-text-field :rules="[v => !!v]" v-model="documento.codigo" outlined hide-details label="Código">
+									<v-text-field :hint="'Los ceros serán agregados de manera automática.  Resultado: ' + zeros" persistent-hint :rules="[v => !!v]" v-model="documento.codigo" outlined label="Código">
 										<template v-slot:prepend-inner>
 											<span class="overline">
 												<!--
@@ -35,7 +35,7 @@
 										</template>
 									</v-text-field>
 								</v-col>
-								<v-col v-if="Object.keys(code_alert).length != 0" cols="12">
+								<v-col class="pt-0" v-if="Object.keys(code_alert).length != 0" cols="12">
 									<v-alert class="mb-0" prominent :type="code_alert.type" dense>
 										{{ code_alert.message }}
 									</v-alert>
@@ -201,6 +201,8 @@
 
 				if (this.valid) {
 
+					this.documento.codigo_zeros = this.zeros
+					
 					this.uploadDocument({
 						documento: this.documento, 
 						pdf: this.pdf, 
@@ -245,6 +247,16 @@
 
 				return false
 
+			},
+			zeros: function(){
+
+				if (this.documento.codigo) {
+					
+					return this.documento.codigo.padStart(4, '0')
+
+				}
+
+				return ''
 			}
 		},
 		watch: {
@@ -257,9 +269,9 @@
 				}
 				
 			},
-			'documento.codigo': function(val){
+			'documento.codigo': function(){
 
-				this.checkCode(val)
+				this.checkCode(this.zeros)
 
 			}
 		},
