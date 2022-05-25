@@ -273,8 +273,6 @@ const actions = {
 
 		const response = await axios.post(process.env.VUE_APP_API_URL + 'delete_document', data)
 
-		console.log(response.data)
-
 		if (response.data.deleted > 0) {
 			
 			Swal.fire(
@@ -283,7 +281,7 @@ const actions = {
 				'success'
 			).then(() => {
 
-				router.push('/home/subir_documento')
+				router.back()
 
 			})
 

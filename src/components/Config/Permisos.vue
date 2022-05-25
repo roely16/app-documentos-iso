@@ -17,7 +17,7 @@
 		</v-row>
 		<v-row>
 			<v-col>
-				<Table :search_prop="search" :data="data_table">
+				<Table external_search :search_prop="search" :data="data_table">
 					<template #action="item">
 						<v-btn @click="() => {
 							form = 'edit'	
