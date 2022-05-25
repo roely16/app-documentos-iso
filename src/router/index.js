@@ -20,6 +20,8 @@ import DocumentDetailPub from '../views/DocumentDetailPub'
 import Config from '../views/Config'
 import NoAccess from '../views/NoAccess'
 import Depuration from '../views/Depuration'
+import Admin from '../views/Admin'
+import DocumentDetailAdmin from '../views/DocumentDetailAdmin'
 
 Vue.use(VueRouter)
 
@@ -151,6 +153,49 @@ const routes = [
 						},
 						{
 							text: 'Configuración',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/admin',
+				name: 'admin',
+				component: Admin,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Administración',
+							disabled: true,
+							href: '#/',
+						}
+					],
+				}
+			},
+			{
+				path: '/home/admin/detalle_documento/:id',
+				name: 'document_detail_admin',
+				component: DocumentDetailAdmin,
+				meta: {
+					breadcrum: [
+						{
+							text: 'Inicio',
+							disabled: false,
+							href: '#/',
+						},
+						{
+							text: 'Administración',
+							disabled: false,
+							href: '#/home/admin',
+						},
+						{
+							text: 'Detalle',
 							disabled: true,
 							href: '#/',
 						}

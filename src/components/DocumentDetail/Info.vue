@@ -16,12 +16,12 @@
 		</v-row>
 		<v-row v-if="permissions.editable" class="text-right">
 			<v-col class="mb-0 pb-0" cols="12">
-				<!-- <v-btn @click="confirmDelete" color="error" small text>
+				<v-btn @click="confirmDelete" color="error" small text>
 					Eliminar
 					<v-icon right>
 						mdi-delete
 					</v-icon>
-				</v-btn> -->
+				</v-btn>
 				<v-btn @click="fetchEditInfo(id)" color="primary" small text>Editar
 					<v-icon right>
 						mdi-pencil
