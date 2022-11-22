@@ -32,7 +32,7 @@
 							<v-col class="pt-0" cols="12">
 								<v-row>
 									<v-col>
-										<span class="overline">Versión {{ preview_version }}</span>
+										<!-- <span class="overline">Versión {{ preview_version }}</span> -->
 									</v-col>
 									<v-col class="text-right">
 										<v-btn @click="() => {

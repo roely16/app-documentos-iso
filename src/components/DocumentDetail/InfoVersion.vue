@@ -70,6 +70,16 @@
 						</v-chip>
 					</v-col>
 				</v-row>
+				<v-row>
+					<v-col cols="4">
+						<v-chip small label>
+							<span class="text-overline">Comentarios</span>					
+						</v-chip>
+					</v-col>
+					<v-col>
+						{{ detail_version.comentarios }}
+					</v-col>
+				</v-row>
 			</v-card-text>
 		</v-card>
 	</div>
